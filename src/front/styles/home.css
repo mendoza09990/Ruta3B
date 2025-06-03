@@ -5,63 +5,68 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
-
+.home-background {
+  background-image: url("https://res.cloudinary.com/depaik2my/image/upload/v1748968418/ChatGPT_Image_3_jun_2025_18_31_55_osafbe.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: repeat;
+}
 .container {
-    max-width: 1140px;
-    box-sizing: border-box;
-    margin: auto;
+  max-width: 1140px;
+  box-sizing: border-box;
+  margin: auto;
 }
 
 .img-center {
-    height: 520px;
+  height: 520px;
 }
 
 .link {
-    list-style: none;
+  list-style: none;
 }
 
 .nav-item {
-    margin: auto;
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    color: #1eae98;
+  margin: auto;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: #1eae98;
 }
 
 #title,
 h1,
 h2 {
-    font-family: "Roboto Flex", sans-serif;
+  font-family: "Roboto Flex", sans-serif;
 }
 
 .mini-container {
-    max-width: 1140px;
-    box-sizing: border-box;
-    margin: auto;
+  max-width: 1140px;
+  box-sizing: border-box;
+  margin: auto;
 }
 
 .items-navbar-bottom {
-    width: 100%;
+  width: 100%;
 }
 
 .carousel-control-next-icon {
-    background-color: black;
-    border-radius: 10px;
+  background-color: black;
+  border-radius: 10px;
 }
 
 .carousel-control-prev-icon {
-    background-color: black;
-    border-radius: 10px;
+  background-color: black;
+  border-radius: 10px;
 }
 
 @media (max-width: 950px) {
-    .container-navbar {
-        flex-direction: column;
-        flex-wrap: wrap;
-    }
+  .container-navbar {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 
-    .items-navbar-bottom {
-        display: flex;
-        justify-content: end;
-    }
+  .items-navbar-bottom {
+    display: flex;
+    justify-content: end;
+  }
 }

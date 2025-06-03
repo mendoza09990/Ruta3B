@@ -1,7 +1,65 @@
 .myborder {
-    border-radius: 15px;
-    border: 1px solid #000000;
-    margin: 10px;
-    padding: 20px;
-    box-shadow: inset 0px 0px 30px -15px rgba(255, 200, 0, 1);
+  border-radius: 20px;
+  background-color: rgba(212, 212, 212, 0.95);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  margin: 30px auto;
+  padding: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 1200px;
+}
+
+.myborder:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 15px;
+  max-height: 300px;
+}
+
+.card-content {
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.card-subtitle {
+  font-size: 1rem;
+  color: #555;
+}
+
+.card-buttons .btn {
+  margin-right: 10px;
+}
+/* Alternancia de margen para zigzag visual */
+/* Zigzag visual: solo desplazamiento horizontal */
+.myborder:nth-child(odd) {
+  margin-left: 5%;
+  margin-right: auto;
+}
+
+.myborder:nth-child(even) {
+  margin-left: auto;
+  margin-right: 5%;
+}
+
+/* En pantallas pequeñas: centrar todo */
+@media (max-width: 768px) {
+  .myborder:nth-child(odd),
+  .myborder:nth-child(even) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

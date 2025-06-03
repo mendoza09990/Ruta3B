@@ -23,8 +23,6 @@ export const Restaurantes = () => {
     </div>
   ));
 
- 
-
   const filterRestaurante = store.restaurantes.filter((item) => {
     return item.tipo_local === select;
   });
@@ -35,37 +33,39 @@ export const Restaurantes = () => {
 
   return (
     <>
-      <div className="text-center w-50 m-auto">
-        <select
-          style={{
-            borderRadius: "10px",
-            border: "1px solid black",
-            backgroundColor: "rgb(255, 200, 67)",
-            color: "black",
-          }}
-          className="w-25 m-auto  select-rest"
-          onChange={(e) => setSelect(e.target.value)}
-        >
-          {values.map((optionValue, i) => {
-            return <option key={i}>{optionValue}</option>;
-          })}
-        </select>
-      </div>
-      <div className="row w-75 mx-auto">
-        {select !== "todos"
-          ? filterRestaurante.map((item, index) => (
-              <div className="col-lg-12 mx-auto" key={item.id}>
-                <CardHome
-                  key={item.id}
-                  id={item.id}
-                  tipo_local={item.tipo_local}
-                  descripcion={item.descripcion}
-                  nombre={item.nombre}
-                  foto={item.foto}
-                />{" "}
-              </div>
-            ))
-          : rest}
+      <div className="home-background">
+        <div className="text-center w-50 m-auto">
+          <select
+            style={{
+              borderRadius: "10px",
+              border: "1px solid black",
+              backgroundColor: "rgb(255, 200, 67)",
+              color: "black",
+            }}
+            className="w-25 m-auto  select-rest"
+            onChange={(e) => setSelect(e.target.value)}
+          >
+            {values.map((optionValue, i) => {
+              return <option key={i}>{optionValue}</option>;
+            })}
+          </select>
+        </div>
+        <div className="row w-75 mx-auto">
+          {select !== "todos"
+            ? filterRestaurante.map((item, index) => (
+                <div className="col-lg-12 mx-auto" key={item.id}>
+                  <CardHome
+                    key={item.id}
+                    id={item.id}
+                    tipo_local={item.tipo_local}
+                    descripcion={item.descripcion}
+                    nombre={item.nombre}
+                    foto={item.foto}
+                  />{" "}
+                </div>
+              ))
+            : rest}
+        </div>
       </div>
     </>
   );
