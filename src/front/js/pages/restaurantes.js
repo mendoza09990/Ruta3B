@@ -11,7 +11,7 @@ export const Restaurantes = () => {
   const values = ["todos", "comida", "bebida"];
 
   const rest = store.restaurantes.map((item, index) => (
-    <div className="col-lg-12 mx-auto" key={item.id}>
+    <div className="col-lg-12 mb-4 d-flex justify-content-center" key={item.id}>
       <CardHome
         key={index}
         id={item.id}
@@ -19,7 +19,7 @@ export const Restaurantes = () => {
         tipo_local={item.tipo_local}
         nombre={item.nombre}
         foto={item.foto}
-      />{" "}
+      />
     </div>
   ));
 
@@ -50,10 +50,14 @@ export const Restaurantes = () => {
             })}
           </select>
         </div>
-        <div className="row w-75 mx-auto">
+
+        <div className="row w-75 justify-content-center mx-auto">
           {select !== "todos"
             ? filterRestaurante.map((item, index) => (
-                <div className="col-lg-12 mx-auto" key={item.id}>
+                <div
+                  className="col-lg-12 mb-4 d-flex justify-content-center"
+                  key={item.id}
+                >
                   <CardHome
                     key={item.id}
                     id={item.id}
@@ -61,7 +65,7 @@ export const Restaurantes = () => {
                     descripcion={item.descripcion}
                     nombre={item.nombre}
                     foto={item.foto}
-                  />{" "}
+                  />
                 </div>
               ))
             : rest}

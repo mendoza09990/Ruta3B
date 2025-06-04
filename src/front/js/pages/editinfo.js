@@ -12,97 +12,95 @@ export const EditInfo = () => {
   const editInfo = (e) => {
     e.preventDefault();
     const id = store.profileRestaurante?.id;
-    console.log(id);
     actions.modificarDatos(id, nombre, tipo_local, descripcion);
   };
+
   useEffect(() => {
-    // actions.getFavorit();
     actions.getInformationCurrentRestaurant();
   }, []);
 
-  console.log(store.profileRestaurante?.id);
   return (
-    <>
+    <div className="background">
       {store.auth &&
-      store.auth != "" &&
-      store.auth != undefined &&
+      store.auth !== "" &&
+      store.auth !== undefined &&
       localStorage.getItem("esLocal") ? (
-        <div className="text-center">
-          <form action="" onSubmit={editInfo}>
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ minHeight: "100vh" }}
+        >
+          <form onSubmit={editInfo}>
             <div
+              className="p-5"
               style={{
-                backgroundColor: "rgb(255, 200, 67)",
-                padding: "6rem",
+                width: "800px",
+                backgroundColor: "rgb(247, 230, 173)",
+                borderRadius: "20px",
+                boxShadow: "0 10px 25px rgba(0, 0, 0, 0.15)",
               }}
-              className="w-50 container py-4 pt-2 row w-25 m-auto text-center"
             >
-              <label htmlFor="">Nombre</label>
-              <input
-                className="mt-2"
-                type="text"
-                onChange={(e) => setNombre(e.target.value)}
-                required
-              />
-              <label htmlFor=" ">Tipo de local</label>
-              <input
-                onChange={(e) => setTipo_local(e.target.value)}
-                className="mt-2"
-                type="text"
-                required
-              />
-              <label htmlFor="">Nueva descripción</label>
-              <input
-                onChange={(e) => setDescripcion(e.target.value)}
-                className="mt-2"
-                type="text"
-                required
-              />
-            </div>
-            <div className="mt-2 text-center ">
+              <h2 className="text-center mb-4">Editar Información</h2>
+
+              <div className="mb-4">
+                <label className="form-label fs-5">Nombre</label>
+                <input
+                  type="text"
+                  className="form-control fs-5 py-3"
+                  onChange={(e) => setNombre(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="form-label fs-5">Tipo de local</label>
+                <input
+                  type="text"
+                  className="form-control fs-5 py-3"
+                  onChange={(e) => setTipo_local(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="form-label fs-5">Nueva descripción</label>
+                <input
+                  type="text"
+                  className="form-control fs-5 py-3"
+                  onChange={(e) => setDescripcion(e.target.value)}
+                  required
+                />
+              </div>
+
               <button
-                onClick={() => window.location.reload()}
                 type="submit"
+                onClick={() => window.location.reload()}
+                className="btn w-100 py-3 fs-5"
                 style={{
                   backgroundColor: "rgb(255, 200, 67)",
                   color: "black",
+                  fontWeight: "bold",
                 }}
-                className="mt-1 btn"
               >
                 Modificar Datos
               </button>
             </div>
           </form>
-          <div className=" mt-5">
-            <Link
-              type="button"
-              className="btn  btn-sm h-50 m-3"
-              style={{
-                backgroundColor: "rgb(255, 200, 67)",
-                color: "black",
-              }}
-              to="/restaurante"
-            >
-              Volver al Inicio
-            </Link>
-          </div>
         </div>
       ) : (
         <div className="div-err-login text-center">
-          <h2>Primero debería registrarse!</h2>
-          <button
-            type="button"
-            className="btn  btn-sm h-50 m-3"
+          <h2>¡Primero deberías registrarte!</h2>
+          <Link
+            className="btn btn-sm m-3"
             style={{
               backgroundColor: "rgb(255, 200, 67)",
               color: "black",
             }}
+            to="/"
           >
-            <Link className=" button-err" to="/">
-              Volver al Inicio
-            </Link>
-          </button>
+            Volver al Inicio
+          </Link>
         </div>
       )}
-    </>
+    </div>
   );
 };

@@ -33,12 +33,15 @@ export const Contacto = () => {
   };
 
   return (
+          <div className="background">
+
     <div className="container-fluid">
       {/* <!-- Wrapper container --> */}
       <div
         style={{
-          backgroundColor: "rgb(255, 200, 67)",
+          backgroundColor: "rgb(247, 230, 173)",
           padding: "6rem",
+          borderRadius: "10px",
         }}
         className="w-50 container py-4"
       >
@@ -107,6 +110,7 @@ export const Contacto = () => {
       {/* <Link to="/">
 				<button className="btn btn-primary">Back home</button>
 			</Link> */}
+    </div>
     </div>
   );
 };

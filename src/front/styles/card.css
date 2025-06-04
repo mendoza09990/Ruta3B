@@ -43,17 +43,6 @@
 .card-buttons .btn {
   margin-right: 10px;
 }
-/* Alternancia de margen para zigzag visual */
-/* Zigzag visual: solo desplazamiento horizontal */
-.myborder:nth-child(odd) {
-  margin-left: 5%;
-  margin-right: auto;
-}
-
-.myborder:nth-child(even) {
-  margin-left: auto;
-  margin-right: 5%;
-}
 
 /* En pantallas pequeñas: centrar todo */
 @media (max-width: 768px) {

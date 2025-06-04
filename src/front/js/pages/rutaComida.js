@@ -2,115 +2,130 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/perfilRestaurante.css";
-import { ComentarioFacebook } from "../component/comentarioFacebook";
+import Swal from "sweetalert2";
 
-export const RutaComida = ({ nombre, descripcion, id, tipo_local }) => {
+export const RutaComida = () => {
   const { store, actions } = useContext(Context);
   const [date, setDate] = useState("");
-
+  const [hour, setHour] = useState("");
+  const [comensales, setComensales] = useState(1);
   const { theid } = useParams();
 
-  const id2 = store.restaurantes.map((a) => a.id);
-
+  const restaurante = store.restaurantes.find(
+    (rest) => rest.id === parseInt(theid)
+  );
   const handleSubmit = async (e) => {
-    actions.addReserva(store.profiles?.id, date);
-    actions.reservarlocal(store.restaurantes[theid-1]?.id);
+    e.preventDefault();
+
+    // 🔎 Validación básica antes de enviar
+    if (!date || !hour || !comensales || comensales < 1) {
+      return Swal.fire({
+        icon: "warning",
+        title: "Campos incompletos",
+        text: "Por favor, rellena todos los campos correctamente antes de reservar.",
+        confirmButtonColor: "#ffc843",
+      });
+    }
+
+    try {
+      await actions.addReserva(store.profiles?.id, date, hour, comensales);
+      await actions.reservarlocal(restaurante?.id);
+
+      Swal.fire({
+        icon: "success",
+        title: "¡Reserva realizada!",
+        html: `
+          <p>Has reservado en <strong>${restaurante?.nombre}</strong></p>
+          <p>📅 <strong>${date}</strong> a las ⏰ <strong>${hour}</strong></p>
+          <p>👥 <strong>${comensales}</strong> comensales</p>
+        `,
+        confirmButtonColor: "#ffc843",
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Hubo un error al realizar la reserva.",
+        confirmButtonColor: "#ffc843",
+      });
+    }
   };
 
   useEffect(() => {
     actions.getInformationCurrentMember();
     actions.getRestaurantes();
   }, []);
+
   return (
     <>
-      <div className="mt-2 m-auto central d-flex">
-        <div
-          className="d-flex m-auto"
-          style={{
-            height: "300px",
-
-            width: "550px",
-          }}
-        >
-          {" "}
-          <img
-            className="w-100"
-            src={store.restaurantes[theid-1]?.foto}
-            alt=""
-          />
-        </div>
-        <div></div>
-        <div
-          className="content m-auto"
-          style={{
-            borderStyle: " solid ",
-            borderWidth: "3px",
-            height: "300px",
-            width: "550px",
-            marginLeft: "1cm",
-            borderColor: "rgb(255, 200, 67)",
-            borderRadius: "20px",
-          }}
-        >
-          <div className="offer">
-            <h5>Precio medio del ticket: </h5>
-            <strong className="">
-              {store.restaurantes[theid-1]?.precio} €
-            </strong>
+      <div className="background">
+        <div className="container d-flex flex-wrap justify-content-center align-items-center gap-5 py-5">
+          <div
+            className="rounded shadow overflow-hidden"
+            style={{ width: "600px", maxWidth: "90%" }}
+          >
+            <img
+              src={restaurante?.foto}
+              alt={`Imagen de ${restaurante?.nombre}`}
+              className="img-fluid w-100"
+              style={{
+                objectFit: "cover",
+                height: "100%",
+                borderRadius: "12px",
+              }}
+            />
           </div>
 
           <div
-            className="text-center informacion"
-            style={{ marginLeft: "40px", marginTop: "40px" }}
+            className="position-relative px-4 py-4 shadow-lg"
+            style={{
+              background: "rgba(255, 255, 255, 0.95)",
+              border: "2px solid rgb(255, 200, 67)",
+              borderRadius: "15px",
+              maxWidth: "600px",
+              minWidth: "300px",
+            }}
           >
-            <h4>
-              <em>{store.restaurantes[theid-1]?.nombre}</em>
-            </h4>
-            <hr className="w-50 m-auto" />
-            <p className="mt-5 fs-4 text">
-              {store.restaurantes[theid-1]?.descripcion}
+            <div
+              style={{
+                position: "absolute",
+                top: "-15px",
+                left: "-15px",
+                backgroundColor: "#ffc843",
+                padding: "6px 16px",
+                borderRadius: "10px",
+                fontWeight: "bold",
+                fontSize: "0.9rem",
+                transform: "rotate(-10deg)",
+                boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+              }}
+            >
+              Precio medio: {restaurante?.precio}€
+            </div>
+
+            <h3 className="mb-2 text-center">
+              <em>{restaurante?.nombre}</em>
+            </h3>
+            <hr className="w-50 mx-auto" />
+            <p
+              className="mt-3 text-justify"
+              style={{ lineHeight: "1.6", fontSize: "1.05rem" }}
+            >
+              {restaurante?.descripcion}
             </p>
           </div>
         </div>
       </div>
-      {store.auth &&
-      store.auth != "" &&
-      store.auth != undefined &&
-      localStorage.getItem("esUsuario") ? (
-        <div className="mt-5 text-center m-auto w-75">
-          <form onSubmit={handleSubmit} action="">
-            <input
-              className="input text-center m-auto"
-              onChange={(e) => setDate(e.target.value)}
-              type="date"
-              id="start"
-              name="trip-start"
-            ></input>
-            <button
-              className="btn btn m-2"
-              style={{ backgroundColor: "rgb(255, 200, 67)", color: "black" }}
-            >
-              Hacer una reserva
-            </button>
-          </form>
-        </div>
-      ) : (
-        ""
-      )}
 
-      <div className="inferior d-flex m-auto mt-5">
-        <ComentarioFacebook theid={theid} />
-      </div>
-      <div className="w-25 m-auto text-center">
-        <Link className="" to="/restaurantes">
-          <span
-            className="mt-3 text-center btn "
-            href="#"
-            role="button"
+    
+      <div className="text-center mt-5">
+        <Link to="/restaurantes">
+          <button
+            className="btn"
             style={{ backgroundColor: "rgb(255, 200, 67)", color: "black" }}
           >
             Volver atrás
-          </span>
+          </button>
         </Link>
       </div>
     </>

@@ -7,8 +7,10 @@ export const RegistroParaLocales = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div className="container mt-3">
-      <RegistroDeLocales />
+    <div className="background">
+      <div className="container">
+        <RegistroDeLocales />
+      </div>
     </div>
   );
 };

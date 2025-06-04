@@ -40,7 +40,7 @@ export const Home = () => {
           <p>
             <img
               className="img-center auto img-fluid w-100"
-              src="https://res.cloudinary.com/dzrp12vse/image/upload/v1748884945/360_F_45301556_I3BkpgiJjqARCBj6LBWMDIXwybwrkmXt_xz8ztr.jpg"
+              src="https://res.cloudinary.com/depaik2my/image/upload/v1748974766/ChatGPT_Image_3_jun_2025_20_19_20_i8becd.png"
             />
           </p>
           <div className="container">
@@ -59,7 +59,9 @@ export const Home = () => {
           </div>
         </div>
         <div className="container-fluid w-75 p-2">
-          <div className="p-3">{randm}</div>
+          <div className="p-3" style={{ marginRight: "35%" }}>
+            {randm}
+          </div>
           <div className="p-3" style={{ marginLeft: "35%" }}>
             {randm2}
           </div>

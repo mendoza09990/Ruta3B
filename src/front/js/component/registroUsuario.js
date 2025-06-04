@@ -72,16 +72,15 @@ const RegistroUsuario = () => {
         className="container"
         style={{
           width: "700px",
-          marginTop: "2cm",
           backgroundColor: "rgb(247, 230, 173)",
           padding: "1cm",
-          marginBottom: "150px",
           borderRadius: "15px",
         }}
       >
         {store.auth ? (
           <Navigate to="/login" />
         ) : (
+          
           <form onSubmit={handleSubmit2}>
             <div className="mb-3">
               <label className="p-1 " htmlFor="">
